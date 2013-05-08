@@ -1,0 +1,7 @@
+#+DATE: [2013-05-06 Mon 16:00]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
+#+CATEGORY: ASP.NET
+#+TAGS:
+#+DESCRIPTION:
+#+TITLE: Compile ASP.NET WebForms .ascx UserControls into Assembly for Re-Use
+

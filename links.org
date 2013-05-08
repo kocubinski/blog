@@ -1,0 +1,27 @@
+#+POSTID: 36
+#+DATE: [2013-05-06 Mon 08:59]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
+#+CATEGORY: emacs
+#+TAGS:
+#+DESCRIPTION:
+#+TITLE: Links
+
+** Misc Programming
+  - [[http://lists.gnu.org/archive/html/emacs-orgmode/2012-09/msg01163.html][An amazing email thread about org-mode and Evernote and how my life should be organized]]
+  - [[http://gwan.ch][G-Wan web server]]
+
+** Unity
+  - [[http://stackoverflow.com/questions/12274252/how-to-implement-unity-like-intenal-call-with-mono][Stack overflow question about engine calls]]
+  - [[http://www.mono-project.com/Embedding_Mono#Exposing_C_code_to_the_CIL_universe][Embedding mono in C]]
+  - [[https://github.com/mono/moon/blob/8d8ece884382d653d215b0da5bf633079566d816/src/deployment.cpp#L579][Embedding code example on github]]
+  - [[https://github.com/MrJoy/UnityREPL][Unity REPL]]
+  - [[http://devmag.org.za/2012/07/12/50-tips-for-working-with-unity-best-practices/][Someone's opinion on Unity Best Practices]]
+
+  On networking in Unity:  
+  - [[http://udn.epicgames.com/Three/NetworkingOverview.html#Player%20Movement%20and%20Prediction][UDN on Player Movement and Prediction]]
+  - [[http://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking][Valve - Source Multiplayer Networking]]
+  - [[http://developer.valvesoftware.com/wiki/Lag_Compensation][Valve - Lag Compensation]]
+  - [[http://developer.valvesoftware.com/wiki/Working_With_Prediction][Valve - Working with Prediction]]
+
+** Emacs
+   - [[http://stackoverflow.com/questions/3805647/enabling-flyspell-mode-on-emacs-w32][ASpell on Emacs/w32]]

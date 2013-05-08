@@ -1,0 +1,68 @@
+#+POSTID: 58
+#+DATE: [2013-05-07 Tue 16:05]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
+#+CATEGORY: emacs
+#+TAGS: emacs org
+#+DESCRIPTION:
+#+TITLE: Org-Mode and Todos
+
+I recently came across [[http://lists.gnu.org/archive/html/emacs-orgmode/2012-09/msg01163.html][this fantastic email thread]] extolling the virtues of org-mode in the
+context of Evernote's shortcomings. I seem to be about as OCD as Eden Cardim, and have the same
+tendency to want to document *everything* I do on the computer. At the very least it turned me
+onto [[http://www.bitlbee.org][bitlbee]] (which you should check out), but really picqued my interest as to how I can use
+org-mode to organize my super-saturated brain and life.
+
+This post is really just a collection of useful org-mode functions and general how-to for using
+todos to win at life.
+
+In the beginning, there was nothing.  But the nothingness stirred, and then there was:
+
+** Org-Mode and the Wonders of Todo Lists
+
+[[http://orgmode.org/org.html#TODO-basics][Start here]], creating TODOs is very easy.
+#+begin_example
+C-c C-t 
+#+end_example
+to create/cycle a todo item.
+
+Use
+#+begin_example
+(setq org-log-done 'time)
+#+end_example
+To close items with a data/time.
+
+#+begin_example
+(setq org-todo-keywords
+       '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
+#+end_example
+To add more states besides TODO/DONE.  Org-mode can get really crazy with these, see 
+[[http://orgmode.org/org.html#Workflow-states][here]] for more.
+
+Ooo, sub-tasks and checkboxes. Take that, Trello! Just insert either a ~[/]~ or ~[%]~ in the
+anywhere in the headline.  Will update when a child does, or force an update with ~C-c C-c~.
+#+begin_example
+     * Organize Party [33%]
+     ** TODO Call people [1/2]
+     *** TODO Peter
+     *** DONE Sarah
+     ** TODO Buy food
+     ** DONE Talk to neighbor
+
+     * TODO Organize party [2/4]
+       - [-] call people [1/3]
+         - [ ] Peter
+         - [X] Sarah
+         - [ ] Sam
+       - [X] order food
+       - [ ] think about what music to play
+       - [X] talk to the neighbors
+#+end_example
+
+To register a files todos into the global todo-list, and then read it use
+#+begin_example
+(org-agenda-file-front)
+(org-todo-list)
+#+end_example
+[[http://orgmode.org/org.html#Agenda-Views][More on Agendas Views]]
+
+This post will be edited in the future as I go deeper.
