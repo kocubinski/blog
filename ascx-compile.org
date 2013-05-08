@@ -1,3 +1,4 @@
+#+POSTID: 90
 #+DATE: [2013-05-06 Mon 16:00]
 #+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
 #+CATEGORY: ASP.NET
@@ -5,3 +6,97 @@
 #+DESCRIPTION:
 #+TITLE: Compile ASP.NET WebForms .ascx UserControls into Assembly for Re-Use
 
+Given the following (annoying) constraints:  
+- Use [[http://www.asp.net/web-forms][ASP.NET Webforms]]
+- Designed some ASCX UserControls with code-behind
+- Must re-use said controls in multiple Web Sites/Web Applications
+
+To the uninitiated this may sound straight-forward. But oh ho, how it is not.  WebForms is many things,
+but re-usable is not really one of them.  Unless you hack it.  A bit.
+
+This question has been asked before around the web, and received numerous answers ranging from
+"not possible" to <insert poor suggestion>, e.g. [[http://stackoverflow.com/questions/398538/is-it-possible-to-add-a-web-user-control-to-a-class-library][here]]. Which isn't surprising considering most
+hackers have moved on from WebForms to.. better frameworks. But some of us are still stuck with
+it, and this post is for you.
+
+** Background
+
+The ASP.NET webserver serves compiled Controls, all of which derive from [[http://msdn.microsoft.com/en-us/library/system.web.ui.control.aspx][Control]].  The only
+MSDN certified way to create a re-usable one is to:  
+1) Inherit from Control (or any subclass thereof), and  
+2) Override ~RenderContents~ e.g.
+#+begin_example
+    protected override void RenderContents(HtmlTextWriter writer)
+    {
+        writer.WriteEncodedText(Text);
+
+        string displayUserName = DefaultUserName;
+        if (Context != null)
+        {
+            string userName = Context.User.Identity.Name;
+            if (!String.IsNullOrEmpty(userName))
+            {
+                displayUserName = userName;
+            }
+        }
+
+        if (!String.IsNullOrEmpty(displayUserName))
+        {
+            writer.Write(", ");
+            writer.WriteEncodedText(displayUserName);
+        }
+
+        writer.Write("!");
+    }
+#+end_example
+
+Well you can see how limited this is.  But that's the extent of what's provided.  What I want
+is to use all the niceties of ASCX with templating and code-behind, compile it, and re-use the
+resulting class(es).  This is easily possible in the same Web Site/Application, but what about
+from another one?
+
+Before the ASP.NET webserver serves an ASCX UserControl, it first compiles it (and all its
+dependencies) with [[http://msdn.microsoft.com/en-us/library/ms229863(v=vs.80).aspx][aspnet_compiler.exe]].  If ~-fixednames~ is set, each control will have *its
+own* assembly.  If not set, ~aspnet_compiler.exe~ will package as many controls into as few
+assemblies as it can, and split them apart only for the sake of resolving dependencies.  This
+is why circular references between controls are not permitted in Web Sites, because it would create
+circular dependencies in the resulting DLLs.  String resources (for static, unchanging content 
+such as HTML) are embedded as DLL resources and retrieved at runtime via the [[http://msdn.microsoft.com/en-us/library/windows/desktop/ms648042(v%3Dvs.85).aspx][FindResources]]
+function. When a request is made, the server will call into these DLLs to render and serve the
+page/controls.
+
+So far, so good.  So shouldn't it be possible to just use the compiled DLLs in other projects?
+Yes it is possible, and its pretty easy too.
+
+** Re-using
+
+This is the script I use to precompile controls for re-use.
+
+#+begin_example
+@echo off
+
+set compiler_path=%systemroot%\Microsoft.NET\Framework\v2.0.50727
+set net_lib=%systemroot%\Microsoft.NET\Framework\v3.5
+set aspnet_merge=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.0A\Bin\aspnet_merge.exe 
+
+%compiler_path%\aspnet_compiler.exe -p site -fixednames -c -f -d -v / PrecompiledWeb
+
+"%aspnet_merge%" PrecompiledWeb -o ReUsable.Controls.dll
+
+copy /Y PrecompiledWeb\bin\ReUsable.Controls.dll Bin
+rmdir /s /q PrecompiledWeb
+#+end_example
+
+Simply compiles the Web Site, and then merges the resulting DLLs with [[http://msdn.microsoft.com/library/bb397866.aspx][aspnet_merge.exe]].  This
+has worked for me so far. If you start getting exceptions thrown from ~FindResource~ you're
+doing something wrong. It will also handle properly merging the string resources, which is
+something ILSpy will *not* do, which I learned the hard way.
+
+Only UserControls can be re-used, and you would do so like:
+#+begin_example
+<%@ Register TagPrefix="uc" Namespace="ReUsable.Controls" Assembly="ReUsable.Controls" %>
+<uc:MyControl runat="server" ID="myControl" />
+#+end_example
+
+Since this works so well for UserControls, you may be tempted to try the same thing for Pages.
+This will not work however, and you will drown in a sea in ~FindResource~ errors.
