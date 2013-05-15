@@ -25,3 +25,6 @@
 
 ** Emacs
    - [[http://stackoverflow.com/questions/3805647/enabling-flyspell-mode-on-emacs-w32][ASpell on Emacs/w32]]
+     
+** ASP.NET
+   - [[http://andrewtwest.com/2010/02/25/using-web-config-transformations-in-web-site-projects/][Hacking web.config transmformations in ASP.NET websites]]
