@@ -22,7 +22,8 @@
   - [[http://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking][Valve - Source Multiplayer Networking]]
   - [[http://developer.valvesoftware.com/wiki/Lag_Compensation][Valve - Lag Compensation]]
   - [[http://developer.valvesoftware.com/wiki/Working_With_Prediction][Valve - Working with Prediction]]
-
+  - [[https://developer.valvesoftware.com/wiki/Prediction][Valve - Prediction]]
+  - [[https://developer.valvesoftware.com/wiki/Networking_Entities][Valve - Networking Entities]]
 ** Emacs
    - [[http://stackoverflow.com/questions/3805647/enabling-flyspell-mode-on-emacs-w32][ASpell on Emacs/w32]]
      

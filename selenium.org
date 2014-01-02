@@ -1,0 +1,40 @@
+#+DATE: [2013-06-24 Mon 09:25]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
+#+CATEGORY: emacs
+#+TAGS:
+#+DESCRIPTION:
+#+TITLE: Integration and Load testing with Selenium and The Grinder
+
+Pick up the latest Selenium IDE [[http://docs.seleniumhq.org/download][here]].
+Pick up Selenium Server [[http://docs.seleniumhq.org/download][here]].
+Also need the JDK installed, since The Grinder only speaks JVM.
+Record Tests
+
+Install Clojure on Windows, set environment variables.
+Nrepl works pretty with once lein is in PATH
+
+Generated JUnit WebDriver from FireFox IDE
+clj-webdriver 
+
+need this flow:
+Firefox IDE -> .java -> javac (Maven/Eclipse) -> .jar -> lein
+-> clojure script using generated test class and script TheGrinder
+
+The challenge is using the lein localrepo plugin to reference the the
+compiled .jar into the project.
+
+I'm going to try to use Eclipse to compile.
+
+a sort of overview of the java/javac/jar tools
+http://www.cs.usfca.edu/~parrt/course/601/lectures/java.tools.html
+
+#+begin_example
+java -jar selenium-server-standalone-2.33.0.jar
+#+end_example
+
+#+begin_example
+javac -classpath selenium-2.33.0\selenium-java-2.33.0.jar;selenium-2.33.0\libs\junit-dep-4.11.jar TotalPro_LoginMilestones.java
+#+end_example
+
+#+begin_example
+#+end_example
