@@ -1,0 +1,66 @@
+#+BLOG: wordpress
+#+POSTID: 100
+#+DATE: [2014-04-13 Sun 14:39]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
+#+CATEGORY: emacs
+#+TAGS: emacs oh-my-emacs
+#+DESCRIPTION:
+#+TITLE: Oh my emacs (and a promsise)
+
+Finally a free Sunday, emacs hacking and [[http://www.hanselman.com/blog/YakShavingDefinedIllGetThatDoneAsSoonAsIShaveThisYak.aspx][yak shaving]] all day.  Couldn't be
+happier.  There is quite bit of interesting work coming up for me, lots of fun
+problems to solve, and solutions I will easily forget if I don't write them
+down somewhere. Why not here?  It helps me remember, and may help someone else.  I'm
+going to record more, I promise!
+
+With several Clojure projects on the horizon, I decided to take a fresh look at
+my emacs config.
+
+[[file:awful_wiring.jpg]]
+
+Hmm, NOPE. ~mv .emacs.d .emacs.d.old~ it is.
+
+After a bit of searching, I decided to try out [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].  It uses the
+solarized-dark theme *and* evil right of the box, great!
+
+But of course I needed to make a few tweaks.  Oh my emacs uses ~el-get~ instead
+of ELPA, which can be a bit buggy at times.  I ran into a few [[https://github.com/xiaohanyu/oh-my-emacs/issues/56][problems]] during
+installation, but they were easy enough to resolve.
+
+Customizing/extending is easy though.  Oh-my-emacs will try to load all files
+in the current ~emacs.d/$USER~ directory.  So far here is what I have so far in ~$HOME/emacs.d/binski/binski.el~:
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key [(f10)] 'ido-switch-buffer)
+(global-set-key (kbd "C-,") 'other-window)
+
+(blink-cursor-mode -1)
+
+(ome-install 'org2blog)
+
+(require 'org2blog-autoloads)
+(setq org2blog/wp-use-sourcecode-shortcode t)
+(setq org2blog/wp-blog-alist
+      '(("wordpress"
+         :url "http://kocubinski.wordpress.com/xmlrpc.php"
+         :username "kocubinski"
+         :default-title "Hello World"
+         :default-categories ("emacs")
+         :tags-as-categories nil)))
+#+END_SRC
+
+~ome-install~ installs/loads the ~org2blog~ package via el-get.  But it barfed
+immediately because ~(org-version)~ was returning and empty string.  This was
+because of this line in ~init.el~:
+
+#+BEGIN_SRC emacs-lisp
+;; enable git shallow clone to save time and bandwidth
+(setq el-get-git-shallow-clone t)
+#+END_SRC
+
+Which is now commented out in my [[https://github.com/kocubinski/oh-my-emacs/commit/441af8042688d79cc0d524c5ce8a5b96a712b8c6][fork]].  The tags weren't getting checkout out, and so no
+version number was getting created when ~org-mode~ compiles.
+
+Excited to see what else this awesome package has to offer.
+
+#+awful_wiring.jpg http://kocubinski.files.wordpress.com/2014/04/wpid-awful_wiring.jpg

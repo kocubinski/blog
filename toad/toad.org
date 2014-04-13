@@ -1,0 +1,86 @@
+#+BLOG: wordpress
+#+POSTID: 110
+#+DATE: [2014-04-13 Sun 15:28]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
+#+CATEGORY: linux
+#+TAGS: wine linux
+#+DESCRIPTION:
+#+TITLE: Toad for MySQL on Linux via Wine
+
+Toad for MySQL *must* run in a 32-bit wine environment.  So if you're running a
+64-bit machine and installed wine to ~$HOME/.wine~ (the default behaviour) its
+a 64-bit installation.
+
+To create a 32-bit one, simply:
+#+BEGIN_EXAMPLE
+$ WINEARCH=win32 WINEPREFIX=$HOME/.wine32 winecfg
+#+END_EXAMPLE
+
+Now we need to start wine into this environment, I use two aliases:
+
+#+BEGIN_EXAMPLE
+alias wine32='env WINEARCH=win32 WINEPREFIX=$HOME/.wine32 wine'
+alias winetricks32='env WINEARCH=win32 WINEPREFIX=$HOME/.wine32 winetricks'
+#+END_EXAMPLE
+~wine~ will be 64-bit, and ~wine32~ will be 32-bit.  You can extend this
+pattern for more wine drives as you need.
+
+Toad needs the .NET 4.0 Runtime, so:
+#+BEGIN_EXAMPLE
+$ winetricks32 dotnet40
+#+END_EXAMPLE
+
+Now download Toad and:
+#+BEGIN_EXAMPLE
+wine32 Downloads/Quest_Toad-for-MySQL-Freeware_70.exe
+#+END_EXAMPLE
+
+The first time Toad starts you will get an exception.  I think its because I
+don't have a browser installed?  Anyway, it can be fixed by modifying some settings
+in Toad.
+
+[[file:toad_settings.png]]
+
+However, when you click "OK" Toad will start recursively throwing exceptions.  I
+couldn't figure out which process to kill, so I just restarted awesome (my
+window manager).  Anyway now it works great!
+
+I'll be evaluating Toad for MySQL vs SQLYog (both running in wine).
+
+Also, while we're at it, here are some better "post Windows 98" styles colors for wine
+programs.  Replace this key in ~$HOME/.wine32/users.reg~
+#+BEGIN_EXAMPLE
+[Control Panel\\Colors] 1122940464
+"ActiveBorder"="154 154 154"
+"ActiveTitle"="0 0 0"
+"AppWorkSpace"="154 154 154"
+"Background"="246 246 246"
+"ButtonAlternativeFace"="200 0 0"
+"ButtonDkShadow"="154 154 154"
+"ButtonFace"="246 246 246"
+"ButtonHilight"="238 238 238"
+"ButtonLight"="246 246 246"
+"ButtonShadow"="238 238 238"
+"ButtonText"="0 0 0"
+"GradientActiveTitle"="213 166 55"
+"GradientInactiveTitle"="213 166 55"
+"GrayText"="128 128 128"
+"Hilight"="100 132 164"
+"HilightText"="255 255 255"
+"InactiveBorder"="246 246 246"
+"InactiveTitle"="193 197 171"
+"InactiveTitleText"="255 255 255"
+"InfoText"="0 0 0"
+"InfoWindow"="246 246 246"
+"Menu"="246 246 246"
+"MenuBar"="0 0 0"
+"MenuHilight"="100 132 164"
+"MenuText"="0 0 0"
+"Scrollbar"="246 246 246"
+"TitleText"="255 255 255"
+"Window"="255 255 255"
+"WindowFrame"="154 154 154"
+"WindowText"="0 0 0"
+#+END_EXAMPLE
+
+#+toad_settings.png http://kocubinski.files.wordpress.com/2014/04/wpid-toad_settings.png
