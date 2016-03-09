@@ -1,0 +1,48 @@
+#+BLOG: wordpress
+#+POSTID: 128
+#+DATE: [2016-03-08 Tue 12:22]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+CATEGORY:
+#+TAGS:
+#+DESCRIPTION:
+#+TITLE: Patterns for localization or post-processing
+
+As a maintainer of a legacy C# code base, I recently had the opportunity to refactor a large portion of that
+code into a dependency injection framework.  The DI framework I chose was Ninject.  This post will describe my
+journey with Ninject and Webforms, hopefully work as a rough HOWTO for the process.
+
+** Installation / Application Registration
+At time of writing, the easiest way to get started is with the nuget package [[https://www.nuget.org/packages/Ninject.Web/][Ninject.Web]], install with:
+#+BEGIN_EXAMPLE
+Install-Package Ninject.Web
+#+END_EXAMPLE
+from the Package Manager Console in visual studio.  This will install the following dependency graph:
+
+#+BEGIN_EXAMPLE
+Ninject.Web
+|_Ninject
+|_Ninject.Web.Common.WebHost
+  |_Ninject.Web.Common
+  |_WebActivatorEx
+    |_Microsoft.Web.Infrastructure
+#+END_EXAMPLE
+
+which are all the assemblies required.  The ~WebActivatorEx~ bit is required for start-up registration and
+insertion of Ninject into the request life-cycle.  The rest is the Ninject framework itself.
+
+This will create 2 files under ~App_Data~
+
+namespace ninjectWebForms2.App_Start
+namespace ninjectWebForms2.App_Start
+namespace ninjectWebForms2.App_Start
+namespace ninjectWebForms2.App_Start
+namespace ninjectWebForms2.App_Start
+namespace ninjectWebForms2.App_Start
+namespace ninjectWebForms2.App_Start
+jjjjjaaaaaaaaaaaaaaaaaaaaaaaaa
+
+** Register Services
+
+** Injection
+*** Life-cycle
+*** Dynamic Controls

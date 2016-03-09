@@ -1,0 +1,20 @@
+#+BLOG: wordpress
+#+POSTID: 158
+#+DATE: [2016-03-09 Wed 12:45]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+CATEGORY: emacs
+#+TAGS:
+#+DESCRIPTION:
+#+TITLE: org2blog 'error in process' when publishing post
+
+It's been awhile since I dug up [[https://github.com/punchagan/org2blog][org2blog]], and I really want to post here more, so it was time dust it off.
+Everything was working fine until I tried to create a post whose resultant XML request was > 4096 bytes.  At
+that point the emacs built-in ~process-send-string~ began to throw an error.
+
+It turns I'm not the first one to [[https://lists.gnu.org/archive/html/bug-gnu-emacs/2016-01/msg00419.html][notice this]].  Someone did eventually push a fix for this into emacs25, but
+the official emacs win32 builds are still on 24.  Thankfully [[http://emacsbinw64.sourceforge.net/][this exists]] (thank you so much for this Chris
+Zeng!) which does solve the problem, and I can happily push XML requests larger than 4k to wordpress again.
+
+However emacs 25 does break more than few features which I use regularly in [[https://github.com/overtone/emacs-live][emacs live]].  The next post
+will be on upgrading emacs live for 25, *or* on pulling in the ~process-send-string~ fix [[https://github.com/emacs-mirror/emacs/commit/58a622d][here]] to an emacs 24
+build and building on windows, whichever seems best.
