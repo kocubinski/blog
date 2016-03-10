@@ -1,3 +1,5 @@
+#+BLOG: wordpress
+#+POSTID: 164
 #+DATE: [2016-03-09 Wed 22:51]
 #+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
 #+CATEGORY: emacs, mingw
@@ -5,12 +7,66 @@
 #+DESCRIPTION:
 #+TITLE: Building emacs24 in Mingw32 (windows)
 
-Install latest msys2
-pacman -S base-devel msys-devel git libgnutls libxml2
-  others from https://sourceforge.net/p/emacsbinw64/wiki/Build%20guideline%20for%20MSYS2-MinGW-w64%20system/
-autogen.sh works
-configure works
+Following up on [[https://kocubinski.wordpress.com/2016/03/09/org2blog-error-in-process-when-publishing-post/][my last post]], I decided to create a build of emacs24 with some upstream changes pulled in.
+I choose to do this because:
+  - The thought of fixing all the packages in emacs-live which break on emacs25 was too much for me.
+  - Hopefully I can provide something for the small (but important!) windows emacs community.
 
-stricmp is undefined in runemacs.c
-use -v flag on gcc to debug
-why is this here? https://sourceforge.net/p/mingw-w64/code-ironcrate/ci/964597b2bba26d814fc155fadd03523063f76659/tree/string/stricmp.c
+So, this will be a quick and dirty guide on building bit emacs in [[https://msys2.github.io/][msys2]].
+
+* 32-bit vs 64-bit
+My initial attempt was creating a 64-bit build by following the guild lines [[https://sourceforge.net/p/emacsbinw64/wiki/Build%20guideline%20for%20MSYS2-MinGW-w64%20system/][here]].  However ~./configure~ kept
+refusing to work, complaining that the machine name was not supported.  This only happened on the emacs24
+branches, not master or the emacs25 branches.  So it would seem that only 32-bit builds are supported on emacs24.
+
+* Install and Prepare msys2
+Installed the latest msys2 from [[http://repo.msys2.org/distrib/i686/][here]].  Ran ~msys2_shell.bat~.  When the environment was ready, updated
+packages with the following command
+#+BEGIN_EXAMPLE
+pacman -S base-devel mingw-w64-i686-toolchain \
+mingw-w64-i686-xpm-nox mingw-w64-i686-libtiff \
+mingw-w64-i686-giflib mingw-w64-i686-jbigkit \
+mingw-w64-i686-libpng mingw-w64-i686-libjpeg-turbo \
+mingw-w64-i686-librsvg mingw-w64-i686-libxml2 \
+mingw-w64-i686-gnutls
+#+END_EXAMPLE
+
+Once completed I closed this shell and started up a 32-bit one with ~mingw32_shell.bat~.
+
+* Building and Installing
+From here I pulled in the one [[https://github.com/emacs-mirror/emacs/commit/58a622d][upstream change]] I needed, and pushed the result to [[https://github.com/kocubinski/emacs][my fork]] of emacs.  This is
+what fixed org2blog to me.  The rest was simple once I figured out how to setup a proper build
+environment.  But the above ~pacman~ command should handle that for anyone reading.
+
+#+BEGIN_EXAMPLE
+./autogen.sh
+./configure
+make -j 4
+make install prefix=/c/dev/apps/emacs-local
+#+END_EXAMPLE
+The ~-j 4~ options for 4 parallel threads *really* sped up the build process for me.
+
+Finally, I just had to pull in some mingw32 DLLs to the emacs folder with the following script.
+#+BEGIN_SRC sh
+INSTALL_DIR=/c/dev/apps/emacs-local
+cp /mingw32/bin/{libwinpthread-*.dll,libXpm-noX*.dll,libdbus-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libgomp-*.dll,libgcc_s_seh-*.dll,libglib-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libintl-*.dll,libiconv-*.dll,libgobject-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libffi-*.dll,libgdk_pixbuf-*.dll,libgio-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libgmodule-*.dll,zlib*.dll,librsvg-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libcairo-*.dll,libcroco-*.dll,libpango-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libpangocairo-*.dll,libxml2-*.dll,libfontconfig-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libfreetype-*.dll,libpixman-*.dll,libpng*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libpangoft*.dll,libpangowin32-*.dll,liblzma-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libexpat-*.dll,libharfbuzz-*.dll,libgnutls-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libgnutlsxx-*.dll,libtiff-*.dll,libtiffxx-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libjpeg-*.dll,libgif-*.dll,libbz2-*.dll,libjbig-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libgmp-*.dll,libhogweed-*.dll,libnettle-*.dll} $INSTALL_DIR/bin
+cp /mingw32/bin/{libp11-kit-*.dll,libtasn1-*.dll} $INSTALL_DIR/bin
+#+END_SRC
+
+And that's it.  After this, I was up and running.
+
+* Release / download
+For anyone interested, the binaries are available [[http://kocubinski.com/dist/emacs-24.5-189d61e.7z][here]].  This a snapshot of the ~mtk-emacs24~ branch.  This
+branch was created from the ~emacs-24.5-rc3-fixed~ tag with [[https://github.com/emacs-mirror/emacs/commit/58a622d][this commit]] cherry-picked on top.
