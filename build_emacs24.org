@@ -1,0 +1,16 @@
+#+DATE: [2016-03-09 Wed 22:51]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+CATEGORY: emacs, mingw
+#+TAGS:
+#+DESCRIPTION:
+#+TITLE: Building emacs24 in Mingw32 (windows)
+
+Install latest msys2
+pacman -S base-devel msys-devel git libgnutls libxml2
+  others from https://sourceforge.net/p/emacsbinw64/wiki/Build%20guideline%20for%20MSYS2-MinGW-w64%20system/
+autogen.sh works
+configure works
+
+stricmp is undefined in runemacs.c
+use -v flag on gcc to debug
+why is this here? https://sourceforge.net/p/mingw-w64/code-ironcrate/ci/964597b2bba26d814fc155fadd03523063f76659/tree/string/stricmp.c
