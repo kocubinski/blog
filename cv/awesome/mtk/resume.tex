@@ -1,0 +1,240 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+%-------------------------------------------------------------------------------
+% CONFIGURATIONS
+%-------------------------------------------------------------------------------
+% A4 paper size by default, use 'letterpaper' for US letter
+\documentclass[11pt, letterpaper]{awesome-cv}
+
+% Configure page margins with geometry
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+
+% Specify the location of the included fonts
+\fontdir[fonts/]
+
+% Color for highlights
+% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
+%                 awesome-nephritis, awesome-concrete, awesome-darknight
+\colorlet{awesome}{awesome-red}
+% Uncomment if you would like to specify your own color
+% \definecolor{awesome}{HTML}{CA63A8}
+
+% Colors for text
+% Uncomment if you would like to specify your own color
+% \definecolor{darktext}{HTML}{414141}
+% \definecolor{text}{HTML}{333333}
+% \definecolor{graytext}{HTML}{5D5D5D}
+% \definecolor{lighttext}{HTML}{999999}
+
+% Set false if you don't want to highlight section with awesome color
+\setbool{acvSectionColorHighlight}{true}
+
+% If you would like to change the social information separator from a pipe (|) to something else
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+
+%-------------------------------------------------------------------------------
+%	PERSONAL INFORMATION
+%	Comment any of the lines below if they are not required
+%-------------------------------------------------------------------------------
+\name{Matthew}{Kocubinski}
+\position{Software Engineer{\enskip\cdotp\enskip}Systems Admin}
+\address{19 Raritan Ave. Apt D3, Highland Park, NJ 08904}
+
+\mobile{(609) 802-4490} 
+\email{matt.kocubinski@gmail.com}
+\homepage{kocubinski.wordpress.com}
+\github{kocubinski}
+\linkedin{kocubinski}
+% \stackoverflow{SO-id}{SO-name}
+% \twitter{@twit}
+% \skype{skype-id}
+% \reddit{reddit-id}
+% \extrainfo{extra informations}
+
+\quote{``The beginning of wisdom is to call things by their proper names."}
+
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% Print the header with above personal informations
+\makecvheader
+
+% Print the footer with 3 arguments(<left>, <center>, <right>)
+% Leave any of these blank if they are not needed
+\makecvfooter
+  {\today}
+  {Matthew Kocubinski~~~·~~~Résumé}
+  {\thepage}
+
+
+%-------------------------------------------------------------------------------
+%	SECTION TITLE
+%-------------------------------------------------------------------------------
+\cvsection{Summary}
+
+%-------------------------------------------------------------------------------
+%	CONTENT
+%-------------------------------------------------------------------------------
+\begin{cvparagraph}
+
+%---------------------------------------------------------
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis. Vivamus at neque arcu, sed tempor quam. Curabitur pharetra tincidunt tincidunt. Morbi volutpat feugiat mauris, quis tempor neque vehicula volutpat. Duis tristique justo vel massa fermentum accumsan. Mauris ante elit, feugiat vestibulum tempor eget, eleifend ac ipsum. Donec scelerisque lobortis ipsum eu vestibulum. Pellentesque vel massa at felis accumsan rhoncus.
+\end{cvparagraph}
+
+
+%-------------------------------------------------------------------------------
+%	SECTION TITLE
+%-------------------------------------------------------------------------------
+\cvsection{Skills}
+
+
+%-------------------------------------------------------------------------------
+%	CONTENT
+%-------------------------------------------------------------------------------
+\begin{cvskills}
+
+%---------------------------------------------------------
+  \cvskill
+    {Programming} % Category
+    {Python, C/C++, Scala, JAVA, Node.JS, OCaml, LaTeX} % Skills
+
+%---------------------------------------------------------
+  \cvskill
+    {Web} % Category
+    {Django with Python, Express with Node.JS, HTML5, LESS} % Skills
+
+%---------------------------------------------------------
+  \cvskill
+    {Languages} % Category
+    {Korean, English, Japanese, Chinese} % Skills
+
+%---------------------------------------------------------
+\end{cvskills}
+
+
+%-------------------------------------------------------------------------------
+%	SECTION TITLE
+%-------------------------------------------------------------------------------
+\cvsection{Experience}
+
+
+%-------------------------------------------------------------------------------
+%	CONTENT
+%-------------------------------------------------------------------------------
+\begin{cventries}
+
+%---------------------------------------------------------
+  \cventry
+    {Software Engineer \& Security Researcher (Compulsory Military Service)} % Job title
+    {R.O.K Cyber Command, MND} % Organization
+    {Seoul, S.Korea} % Location
+    {Aug. 2014 - Exp. Apr. 2016} % Date(s)
+    {
+      \begin{cvitems} % Description(s) of tasks/responsibilities
+        \item {Implemented a military cooperation system which is web based real time messenger in Scala on Lift.}
+        \item {Improved functionality on military command and control system for incident response with Java Servlet.}
+        \item {Lead engineer on agent-less backtracking system that can discover client device's fingerprint(including public and private IP) independently of the Proxy, VPN and NAT.}
+      \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Game Developer Intern at Global Internship Program} % Job title
+    {NEXON} % Organization
+    {Seoul, S.Korea \& LA, U.S.A} % Location
+    {Jan. 2013 - Feb. 2013} % Date(s)
+    {
+      \begin{cvitems} % Description(s) of tasks/responsibilities
+        \item {Developed in Cocos2d-x an action puzzle game(Dragon Buster) targeting U.S. market. Implemented API server which is communicating with game client and In-App Store, along with two other team members who wrote the game logic, designed game graphics.}
+        \item {Won the 2nd prize in final evaluation.}
+      \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Researcher for <Detecting video’s torrents using image similarity algorithms>} % Job title
+    {Undergraduate Research, Computer Vision Lab(Prof. Bohyung Han)} % Organization
+    {Pohang, S.Korea} % Location
+    {Sep. 2012 - Feb. 2013} % Date(s)
+    {
+      \begin{cvitems} % Description(s) of tasks/responsibilities
+        \item {Researched means of retrieving a corresponding video based on image contents using image similarity algorithm.}
+        \item {Implemented prototype that users can obtain torrent magnet links of corresponding video relevant to an image on web site.}
+      \end{cvitems} 
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Software Engineer Trainee} % Job title
+    {Software Maestro (funded by Korea Ministry of Knowledge and Economy)} % Organization
+    {Seoul, S.Korea} % Location
+    {Jul. 2012 - Jun. 2013} % Date(s)
+    {
+      \begin{cvitems} % Description(s) of tasks/responsibilities
+        \item {Performed research memory management strategies of OS and implemented in Python an interactive simulator for Linux kernel memory management.}
+      \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Software Engineer} % Job title
+    {ShitOne Corp. (Start-up company)} % Organization
+    {Seoul, S.Korea} % Location
+    {Dec. 2011 - Feb. 2012} % Date(s)
+    {
+      \begin{cvitems} % Description(s) of tasks/responsibilities
+        \item {Developed a proxy drive smartphone application which connects proxy driver and customer. Implemented overall Android application logic and wrote API server for community service, along with lead engineer who designed bidding protocol on raw socket and implemented API server for bidding.}
+      \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Freelance Penetration Tester} % Job title
+    {SAMSUNG Electronics} % Organization
+    {S.Korea} % Location
+    {Sep. 2013, Mar. 2011 - Oct. 2011} % Date(s)
+    {
+      \begin{cvitems} % Description(s) of tasks/responsibilities
+        \item {Conducted penetration testing on SAMSUNG KNOX, which is solution for enterprise mobile security.}
+        \item {Conducted penetration testing on SAMSUNG Smart TV.}
+      \end{cvitems}
+      %\begin{cvsubentries}
+      %  \cvsubentry{}{KNOX(Solution for Enterprise Mobile Security) Penetration Testing}{Sep. 2013}{}
+      %  \cvsubentry{}{Smart TV Penetration Testing}{Mar. 2011 - Oct. 2011}{}
+      %\end{cvsubentries}
+    }
+
+%---------------------------------------------------------
+\end{cventries}
+
+%-------------------------------------------------------------------------------
+\end{document}
+
+%-------------------------------------------------------------------------------
+%	SECTION TITLE
+%-------------------------------------------------------------------------------
+\cvsection{Education}
+
+
+%-------------------------------------------------------------------------------
+%	CONTENT
+%-------------------------------------------------------------------------------
+\begin{cventries}
+
+%---------------------------------------------------------
+  \cventry
+    {B.S. in Computer Science and Engineering} % Degree
+    {POSTECH(Pohang University of Science and Technology)} % Institution
+    {Pohang, S.Korea} % Location
+    {Mar. 2010 - PRESENT} % Date(s)
+    {
+      \begin{cvitems} % Description(s) bullet points
+        \item {Got a Chun Shin-Il Scholarship which is given to promising students in CSE Dept.}
+      \end{cvitems}
+    }
+
+%---------------------------------------------------------
+\end{cventries}
