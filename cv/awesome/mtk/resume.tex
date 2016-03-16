@@ -6,6 +6,11 @@
 %-------------------------------------------------------------------------------
 % A4 paper size by default, use 'letterpaper' for US letter
 \documentclass[11pt, letterpaper]{awesome-cv}
+\hypersetup
+{
+	pdfauthor={Matthew Kocubinski},
+	pdftitle={Matthew Kocubinski - Software Engineer}
+}
 
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
@@ -55,7 +60,6 @@
 
 \quote{``The beginning of wisdom is to call things by their proper names."}
 
-
 %-------------------------------------------------------------------------------
 \begin{document}
 
@@ -98,18 +102,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque 
 
 %---------------------------------------------------------
   \cvskill
-    {Programming} % Category
-    {Python, C/C++, Scala, JAVA, Node.JS, OCaml, LaTeX} % Skills
-
-%---------------------------------------------------------
-  \cvskill
-    {Web} % Category
-    {Django with Python, Express with Node.JS, HTML5, LESS} % Skills
-
-%---------------------------------------------------------
-  \cvskill
     {Languages} % Category
-    {Korean, English, Japanese, Chinese} % Skills
+    {C\#, F\#, C/C++, Java, Clojure, Clojurescript, Javascript, Python, PHP, HTML/CSS, Perl, Ruby, Emacs Lisp, SQL, AHDL, LaTeX} % Skills
+
+%---------------------------------------------------------
+  \cvskill
+    {Platforms / Frameworks} % Category
+    {.NET/CLR, JVM, GNU/Linux, ASP.NET, Node.js, Altera FPGAs, Django, ASP.NET, Windows Azure } % Skills
+
+%---------------------------------------------------------
+  \cvskill
+    {Tools / Libraries} % Category
+    {Emacs, Vim, ASP.NET, WPF, Windows Forms, MySQL, PostgreSQL, MS SQL, MongoDB, Apache, Nginx, Postfix, ElasticSearch, Windows Driver Kit (WDK), DirectX SDK, Torque Game Engine, git, SVN, Mercurial}
 
 %---------------------------------------------------------
 \end{cvskills}
@@ -128,10 +132,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque 
 
 %---------------------------------------------------------
   \cventry
-    {Software Engineer \& Security Researcher (Compulsory Military Service)} % Job title
-    {R.O.K Cyber Command, MND} % Organization
-    {Seoul, S.Korea} % Location
-    {Aug. 2014 - Exp. Apr. 2016} % Date(s)
+    {Software Programmer} % Job title
+    {PharmaSeq, Inc.} % Organization
+    {Princeton, NJ} % Location
+    {2010 - ??} % Date(s)
     {
       \begin{cvitems} % Description(s) of tasks/responsibilities
         \item {Implemented a military cooperation system which is web based real time messenger in Scala on Lift.}
@@ -211,9 +215,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque 
 \end{cventries}
 
 %-------------------------------------------------------------------------------
-\end{document}
-
-%-------------------------------------------------------------------------------
 %	SECTION TITLE
 %-------------------------------------------------------------------------------
 \cvsection{Education}
@@ -238,3 +239,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque 
 
 %---------------------------------------------------------
 \end{cventries}
+
+
+
+
+
+%-------------------------------------------------------------------------------
+\end{document}
