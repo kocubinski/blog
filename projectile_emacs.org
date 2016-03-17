@@ -1,0 +1,29 @@
+#+BLOG: wordpress
+#+POSTID: 172
+#+DATE: [2016-03-17 Thu 14:29]
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
+#+CATEGORY: emacs
+#+TAGS:
+#+DESCRIPTION:
+#+TITLE: emacs projectile-mode and another build
+
+I'd been meaning to checkout [[https://github.com/bbatsov/projectile][projectile-mode]] for a bit now.  So I did, and it turns out its fantastic. In a
+nutshell, what projectile does is introduce the abstraction of a project" (something which emacs lacks), and
+allows you to run operations a collection of files / folders in said project.
+
+One of my favorite features is ~projectile-grep~, which is global find in your current project.  But this was
+happening:
+
+[[./img/emacs_grep_bad.png]]
+# ./img/emacs_grep_bad.png http://kocubinski.files.wordpress.com/2016/03/emacs_grep_bad.png
+
+Which makes it quite to hard to see what's going on.  Once again, this was [[https://github.com/kocubinski/emacs/commit/2e4c2fe2787785a421f256541de642976e9bd90b][fixed in emacs-25]].  I've pulled
+this change into my emacs24 branch as well, and published a
+[[http://kocubinski.com/dist/emacs-24.5-0603e75.7z][new build]].
+
+And fixed:
+
+[[./img/emacs_good_grep.png]]
+# ./img/emacs_good_grep.png http://kocubinski.files.wordpress.com/2016/03/emacs_good_grep.png
+
+Eventually I'll have to upgrade my ~.emacs.d~ to be 25 friendly, but not yet!
