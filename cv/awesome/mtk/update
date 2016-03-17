@@ -1,4 +1,4 @@
 #!/bin/bash
 
 scp -r *.tex binski@foundquartz.com:tex
-ssh binski@foundquartz.com 'cd tex; xelatex resume.tex; cp -f resume.pdf ../pinekoan-public/secret'
+ssh binski@foundquartz.com 'cd tex; xelatex resume.tex; cp -f resume.pdf ../dev/kocubinski.com/public'
